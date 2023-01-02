@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <title>Tasks list</title>
+</head>
+<body>
+    <section>
+        <div id="heading">
+            <div class="tasks-list">
+                <span>Tasks <span class="list-heading">List</span></span>
+            </div>
+        </div>
+    </section>
+
+    <div class="tiles-section">
+        <div id="full-view">
+            <button id="back-icon">
+                <i class="fa-solid fa-circle-arrow-left left-icon"></i>
+                <span class="back">Back</span>
+            </button>
+
+            <div id="fullview-content-header"></div>
+        </div>
+
+        <div class="add-icon">
+            <button id="add-button">
+                <i class="fa-solid fa-circle-plus plus-icon"></i>
+                <span class="add-task">Add New Task</span>
+            </button>
+        </div>
+
+        <div id="cards-tiles">
+            <!-- <a href="tile-full-view.html">
+                <div class="tile">
+                    <div class="card-title">
+                        Trip to Paris
+                    </div>
+                    <hr>
+                    <div>
+                        <ul style="list-style-type: none;padding-left: 20px;">
+                            <li class="datas label-one">
+                                <input type="checkbox" checked>
+                                <label>Visit Church</label>
+                            </li>
+                            <li class="datas">
+                                <input type="checkbox">
+                                <label>Shopping</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a> -->
+    
+            <!-- <a href="tile-full-view.html">
+                <div class="tile">
+                    <div class="card-title">
+                        My To Do List
+                    </div>
+                    <hr>
+                    <div>
+                        <ul style="list-style-type: none;padding-left: 20px;">
+                            <li class="datas label-one">
+                                <input type="checkbox" checked>
+                                <label>Visit Supermarket</label>
+                            </li>
+                            <li class="datas">
+                                <input type="checkbox">
+                                <label>Buy vegetables</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a> -->
+    
+            <!-- <a href="tile-full-view.html">
+                <div class="third-tile">
+                    <div class="card-title">
+                        Movies I will Watch
+                    </div>
+                    <hr>
+                    <div>
+                        <ul style="list-style-type: none;padding-left: 20px;">
+                            <li class="datas label-one">
+                                <input type="checkbox" checked>
+                                <label>Strangers Things</label>
+                            </li>
+                            <li class="datas">
+                                <input type="checkbox">
+                                <label>Avengers Endgame</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a> -->
+    
+            <!-- <a href="tile-full-view.html">
+                <div class="tile">
+                    <div class="card-title">
+                        Daily Morning Routine for...
+                    </div>
+                    <hr>
+                    <div>
+                        <ul style="list-style-type: none;padding-left: 20px;">
+                            <li class="datas label-one">
+                                <input type="checkbox" checked>
+                                <label>Wake up 6 A.M</label>
+                            </li>
+                            <li class="datas">
+                                <input type="checkbox">
+                                <label>Sleep at 10 P.M</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a> -->
+    
+            <!-- <a href="tile-full-view.html">
+                <div class="tile">
+                    <div class="card-title">
+                        Books to Read
+                    </div>
+                    <hr>
+                    <div>
+                        <ul style="list-style-type: none;padding-left: 20px;">
+                            <li class="datas label-one">
+                                <input type="checkbox" checked>
+                                <label>Design of everyday</label>
+                            </li>
+                            <li class="datas">
+                                <input type="checkbox">
+                                <label>Alchemist</label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </a> -->
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+
+    <div id="add-new-task">
+        <div class="new-card-title">
+            <div class="new-task-header">
+                Add New Task
+            </div>
+            <button id="close-button">
+                <i class="fa-solid fa-xmark cancel-icon"></i>
+            </button>
+        </div>
+        <hr>
+        <div class="input-form">
+            <input type="text" id="task" placeholder="Add New Task">
+            <br>
+            <br>
+            <button id="add-task">
+                <i class="fa-regular fa-plus"></i>
+                <input type="submit" value="Add Task">
+            </button>
+        </div>
+    </div>
+
+    <!-- <div id="add-new-task">
+        <div class="new-card-title">
+            <div class="new-task-header">
+                Add New Item
+            </div>
+            <button id="close-button">
+                <i class="fa-solid fa-xmark cancel-icon"></i>
+            </button>
+        </div>
+        <hr>
+        <div class="input-form">
+            <input type="text" id="task" placeholder="Visit Famous places">
+            <br>
+            <br>
+            <div class="add-task">
+                <i class="fa-regular fa-plus"></i>
+                <input type="submit" value="Add Item">
+            </div>
+        </div>
+    </div> -->
+    <script src="./new-task.js"></script>
+</body>
+</html>
