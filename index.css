@@ -31,6 +31,11 @@ body {
     justify-content: space-evenly;
 }
 
+li span{
+    margin-right: 10px;
+    font-size: 20px;
+}
+
 .left-icon {
     font-size: 27px;
     margin-right: 10px;
@@ -67,6 +72,7 @@ body {
     align-items: center;
     margin: 30px 0;
     background-color: #000;
+    border: none;
 }
 
 .add-icon {
@@ -91,6 +97,10 @@ body {
     font-family: sans-serif;
 }
 
+.data-list {
+    height: 200px;
+}
+
 .tile {
     width: 290px;
     height: 315px;
@@ -98,6 +108,8 @@ body {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #EDEDED;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
     opacity: 1;
     margin-bottom: 17px;
 }

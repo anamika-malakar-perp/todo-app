@@ -7,10 +7,15 @@ let iconAction = document.getElementsByClassName('icon-section');
 let inputField = document.getElementsByTagName('input');
 let backButton = document.getElementById('back-icon');
 let heading    = document.getElementById('heading');
+const addTaskIcon = document.getElementsByClassName('add-task');
+const backIcon  = document.getElementById('back-icon');
+const fullviewContentHeader = document.getElementById('fullview-content-header');
 let counter    = 0;
 let taskMaker  = false;
 let taskList   = [];
 let selectedTile;
+let enableBackButton;
+let newArray = [];
 
 const tilesContainer = document.getElementById('cards-tiles');
 
@@ -39,17 +44,18 @@ closeBtn.addEventListener('click', function() {
 addTaskBtn.addEventListener('click', function() {
     if(taskMaker) {
         let inputField = document.getElementsByTagName('input');
-        let particularField = document.getElementById(selectedTile)
-        let container = document.createElement('div');
+        let particularField = document.getElementById(selectedTile);
+
         let li = document.createElement('li');
         let ul = document.createElement('ul');
 
-        li.innerHTML = `${inputField[0].value} <button>Done</button`;
+        li.innerHTML = `<span>${inputField[0].value}</span><button class="done-btn">Done</button`;
         ul.append(li);
-        container.append(ul);
+        
+        particularField.getElementsByClassName('data-list')[0].append(ul);
 
-        particularField.append(container)
-
+        addNewTask.style.display = 'none';
+        overLay.style.display = 'none';
     } else {
         counter+=1;
         let task = document.getElementById('task').value;
@@ -61,79 +67,103 @@ addTaskBtn.addEventListener('click', function() {
             }
     
             taskList.push(taskObj);
+            newArray.push(taskObj);
         }
 
         if(taskList.length !== 0) {
-            createTiles(taskList);
+            createTiles(taskList.slice(taskList.length-1));
         }
     }
 });
 
-function createTiles(taskList) {
+function createTiles(tasksLists) {
     let tile           = document.createElement('div');    // full tile
     let tileTitle      = document.createElement('div');    // tile title
     let horizontalLine = document.createElement('hr');     // after heading horizontal line
     let iconSection    = document.createElement('div');    // tile icon section
     let addTaskBtn     = document.createElement('button'); // add task on tile button
     let deleteTileBtn  = document.createElement('button'); // delete task tile button
+    let listItem       = document.createElement('div');
 
-    tile.setAttribute('class', 'tile');
-    tile.setAttribute('id', taskList[taskList.length - 1].taskClass);
+    tasksLists.forEach(element => {
 
-    tileTitle.setAttribute('class', 'card-title');
-    tileTitle.innerText = taskList[taskList.length - 1].taskName;
+        tile.setAttribute('class', 'tile');
+        tile.setAttribute('id', element.taskClass);
 
-    iconSection.setAttribute('class', 'icon-section');
+        tileTitle.setAttribute('class', 'card-title');
+        tileTitle.innerText = element.taskName;
 
-    addTaskBtn.setAttribute('class', 'task-button')
-    addTaskBtn.innerHTML = '<i class="fa-solid fa-circle-plus card-icon"></i>';
+        iconSection.setAttribute('class', 'icon-section');
+        iconSection.style.alignSelf = 'end';
+        listItem.setAttribute('class', 'data-list');
 
-    deleteTileBtn.setAttribute('class', 'task-button')
-    deleteTileBtn.innerHTML = '<i class="fa-regular fa-trash-can card-icon"></i>';
-    iconSection.append(addTaskBtn);
-    iconSection.append(deleteTileBtn);
+        addTaskBtn.setAttribute('class', 'task-button')
+        addTaskBtn.innerHTML = '<i class="fa-solid fa-circle-plus card-icon"></i>';
 
-    tile.append(tileTitle);
-    tile.append(horizontalLine);
-    tile.append(iconSection);
+        deleteTileBtn.setAttribute('class', 'task-button')
+        deleteTileBtn.innerHTML = '<i class="fa-regular fa-trash-can card-icon"></i>';
+        iconSection.append(addTaskBtn);
+        iconSection.append(deleteTileBtn);
 
-    let cardTiles = document.getElementById('cards-tiles');
-    cardTiles.appendChild(tile);
+        tile.append(tileTitle);
+        tile.append(horizontalLine);
+        tile.append(listItem);
+        tile.append(iconSection);
 
-    addNewTask.style.display = 'none';
-    overLay.style.display = 'none';
+        let cardTiles = document.getElementById('cards-tiles');
+        cardTiles.appendChild(tile);
+
+        cardTiles.style.justifyContent = 'space-between';
+        addNewTask.style.display = 'none';
+        overLay.style.display = 'none';
+        addTaskIcon[0].style.display = 'unset';
+        backIcon.style.display = 'none';
+        heading.style.display = 'unset';
+        fullviewContentHeader.style.display = 'none';
+
+        taskButton();
+    });
 }
 
-tilesContainer.addEventListener('click', function (e) {
-    if (e.target.classList.contains('tile')) {
-        selectedTile = e.target.id;
-        addNewTask.style.display = 'unset';
-        overLay.style.display = 'unset';
-        // toAddNewTask();
-        taskList.forEach(element => {
-            if(element.taskClass === selectedTile) {
-                const elements = document.getElementsByClassName('tile');
-                while(elements.length > 0){
-                    elements[0].parentNode.removeChild(elements[0]);
-                }
+function taskButton() {
+    
+    tilesContainer.addEventListener('click', function (e) {
+        if (e.target.classList.contains('tile') || e.target.classList.contains('data-list')) {
+            
+            selectedTile = e.target.id || e.target.parentNode.id;
+            taskList.forEach((element, index) => {
+                if(element.taskClass !== selectedTile) {
+                    document.getElementById(element.taskClass).style.display = 'none';
+                } 
+            });
+            let cardTiles = document.getElementById('cards-tiles');
+            cardTiles.style.justifyContent = 'center';
 
-                createTiles([element]);
-                heading.style.display = 'none';
-
-                let cardTiles = document.getElementById('cards-tiles');
-                cardTiles.style.justifyContent = 'center';
-
-                const addTaskIcon = document.getElementsByClassName('add-task');
-                const backButton  = document.getElementById('back-icon');
-                const fullviewContentHeader = document.getElementById('fullview-content-header');
-                addTaskIcon[0].style.display = 'none';
-                backButton.style.display = 'flex';
-                fullviewContentHeader.innerHTML = e.target.innerText;
-                fullviewContentHeader.style.display = 'flex';
-            }
-        });
-    }
-});
+            heading.style.display = 'none';
+            addTaskIcon[0].style.display = 'none';
+            backIcon.style.display = 'flex';
+            fullviewContentHeader.innerText = document.getElementById(selectedTile).getElementsByClassName('card-title')[0].innerText;
+            fullviewContentHeader.style.display = 'flex';
+        } else if(e.target.classList.contains('fa-circle-plus')) {
+            selectedTile = e.target.parentNode.parentNode.parentNode.id;
+            addNewTask.style.display = 'unset';
+            overLay.style.display    = 'unset';
+            toAddNewTask();
+        } else if(e.target.classList.contains('done-btn')) {
+            e.target.parentNode.getElementsByTagName('span')[0].style.textDecoration = 'line-through';
+            e.target.parentNode.getElementsByTagName('span')[0].style.color='red';
+            e.target.parentNode.getElementsByTagName('button')[0].style.display = 'none'
+        } else if(e.target.classList.contains('fa-trash-can')) {
+            let selectedTileId = e.target.parentNode.parentNode.parentNode.id;
+            document.getElementById(selectedTileId).remove();
+            taskList.forEach((element, index) => {
+                if(element.taskClass === selectedTile) {
+                    taskList.splice(index, 1);
+                } 
+            });
+        }
+    });
+}
 
 function toAddNewTask() {
     taskMaker = true;
@@ -147,3 +177,18 @@ function toAddNewTask() {
 
     inputField[1].value = 'Add Item';
 }
+
+
+backButton.addEventListener('click', function() {
+    enableBackButton = true;
+    taskList.forEach((element, index) => {
+        document.getElementById(element.taskClass).style.display = 'flex';
+    });
+    let cardTiles = document.getElementById('cards-tiles');
+    cardTiles.style.justifyContent = 'space-between';
+
+    heading.style.display = 'unset';
+    addTaskIcon[0].style.display = 'unset';
+    backIcon.style.display = 'none';
+    fullviewContentHeader.style.display = 'none';
+});
