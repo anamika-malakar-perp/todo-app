@@ -14,6 +14,7 @@ let counter    = 0;
 let taskMaker  = false;
 let taskList   = [];
 let selectedTile;
+let fullView = false;
 let enableBackButton;
 let newArray = [];
 
@@ -70,7 +71,14 @@ addTaskBtn.addEventListener('click', function() {
             newArray.push(taskObj);
         }
 
-        if(taskList.length !== 0) {
+        if(fullView) {
+            taskList.forEach((element, index) => {
+                if((taskList.length - 1) !== index) {
+                    document.getElementById(element.taskClass).style.display = 'flex';
+                }
+            });
+            createTiles(taskList.slice(taskList.length-1));
+        } else {
             createTiles(taskList.slice(taskList.length-1));
         }
     }
@@ -144,6 +152,8 @@ function taskButton() {
             backIcon.style.display = 'flex';
             fullviewContentHeader.innerText = document.getElementById(selectedTile).getElementsByClassName('card-title')[0].innerText;
             fullviewContentHeader.style.display = 'flex';
+
+            fullView = true;
         } else if(e.target.classList.contains('fa-circle-plus')) {
             selectedTile = e.target.parentNode.parentNode.parentNode.id;
             addNewTask.style.display = 'unset';
