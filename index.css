@@ -9,6 +9,11 @@ body {
     padding: 15px 0 15px 0;
 }
 
+#no-list {
+    font-size: 30px;
+    color: #fff;
+}
+
 #full-view {
     display: flex;
     flex-direction: row;

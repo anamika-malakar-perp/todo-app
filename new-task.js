@@ -9,6 +9,7 @@ let backButton = document.getElementById('back-icon');
 let heading    = document.getElementById('heading');
 const addTaskIcon = document.getElementsByClassName('add-task');
 const backIcon  = document.getElementById('back-icon');
+const noList    = document.getElementById('no-list');
 const fullviewContentHeader = document.getElementById('fullview-content-header');
 let counter    = 0;
 let taskMaker  = false;
@@ -79,6 +80,7 @@ addTaskBtn.addEventListener('click', function() {
             });
             createTiles(taskList.slice(taskList.length-1));
         } else {
+            noList.style.display = 'none';
             createTiles(taskList.slice(taskList.length-1));
         }
     }
